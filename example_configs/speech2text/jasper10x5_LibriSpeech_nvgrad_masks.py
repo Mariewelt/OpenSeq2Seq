@@ -187,7 +187,7 @@ train_params = {
     "data_layer": Speech2TextDataLayer,
     "data_layer_params": {
         "dataset_files": [
-            "/data/librispeech/train.csv",
+            "/result/librispeech/train.csv",
             #"/data/librispeech/librivox-train-clean-360.csv",
             #"/data/librispeech/librivox-train-other-500.csv"
         ],
@@ -200,7 +200,7 @@ eval_params = {
     "data_layer": Speech2TextDataLayer,
     "data_layer_params": {
         "dataset_files": [
-            "/data/librispeech/val.csv"
+            "/result/librispeech/val.csv"
             #"/data/librispeech/librivox-dev-clean.csv",
         ],
         "shuffle": False,

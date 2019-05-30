@@ -8,6 +8,65 @@ from open_seq2seq.losses import CTCLoss
 from open_seq2seq.optimizers.lr_policies import poly_decay
 from open_seq2seq.optimizers.novograd import NovoGrad
 
+import numpy as np
+
+fold = 0
+
+
+def load_fold(filename, train_fold_file, val_fold_file, train_data, val_data):
+    f = open(filename, "r")
+    data = []
+    for line in f:
+        data.append(line[:-1])
+    f.close()
+
+    data = np.array(data)
+
+    f = open(train_fold_file, 'r')
+    train_fold = []
+    for line in f:
+        train_fold.append(int(line[:-1]))
+    f.close()
+
+    f = open(val_fold_file, 'r')
+    val_fold = []
+    for line in f:
+        val_fold.append(int(line[:-1]))
+    f.close()
+    train_data.extend(list(data[train_fold]))
+    val_data.extend(list(data[val_fold]))
+    return train_data, val_data
+
+
+train_data = []
+val_data = []
+
+train_data, val_data = load_fold("/data/librispeech/librivox-train-clean-100.csv",
+                                 "./data/folds/train_clean_100/train/fold_" + str(fold),
+                                 "./data/folds/train_clean_100/val/fold_" + str(fold),
+                                 train_data, val_data)
+
+train_data, val_data = load_fold("/data/librispeech/librivox-train-clean-360.csv",
+                                 "./data/folds/train_clean_360/train/fold_" + str(fold),
+                                 "./data/folds/train_clean_360/val/fold_" + str(fold),
+                                 train_data, val_data)
+
+train_data, val_data = load_fold("/data/librispeech/librivox-train-other-500.csv",
+                                 "./data/folds/train_other_500/train/fold_" + str(fold),
+                                 "./data/folds/train_other_500/val/fold_" + str(fold),
+                                 train_data, val_data)
+
+f = open('/data/librispeech/train.csv', 'w')
+for line in train_data:
+    f.writelines(line + '/n')
+f.close()
+
+f = open('/data/librispeech/val.csv', 'w')
+for line in val_data:
+    f.writelines(line + '/n')
+f.close()
+
+
 residual_dense = True # Enable or disable Dense Residual
 
 base_model = Speech2Text
@@ -185,16 +244,10 @@ base_params = {
 train_params = {
     "data_layer": Speech2TextDataLayer,
     "data_layer_params": {
-        "augmentation": {
-            'n_freq_mask': 2,
-            'n_time_mask': 2,
-            'width_freq_mask': 6,
-            'width_time_mask': 6,
-        },
         "dataset_files": [
-            "/data/librispeech/librivox-train-clean-100.csv",
-            "/data/librispeech/librivox-train-clean-360.csv",
-            "/data/librispeech/librivox-train-other-500.csv"
+            "/data/librispeech/train.csv",
+            #"/data/librispeech/librivox-train-clean-360.csv",
+            #"/data/librispeech/librivox-train-other-500.csv"
         ],
         "max_duration": 16.7,
         "shuffle": True,
@@ -205,7 +258,8 @@ eval_params = {
     "data_layer": Speech2TextDataLayer,
     "data_layer_params": {
         "dataset_files": [
-            "/data/librispeech/librivox-dev-clean.csv",
+            "/data/librispeech/val.csv"
+            #"/data/librispeech/librivox-dev-clean.csv",
         ],
         "shuffle": False,
     },

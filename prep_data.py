@@ -1,6 +1,13 @@
 import numpy as np
+import argparse
 
-fold = 0
+parser = argparse.ArgumentParser(description='Fold')
+parser.add_argument("--fold", default=None, type=int)
+
+args = parser.parse_args()
+
+fold = args.fold
+
 
 def load_fold(filename, train_fold_file, val_fold_file, train_data, val_data):
     f = open(filename, "r")
@@ -41,8 +48,8 @@ train_data, val_data = load_fold("/data/librispeech/librivox-train-clean-360.csv
                                  train_data, val_data)
 
 train_data, val_data = load_fold("/data/librispeech/librivox-train-other-500.csv",
-                                 "./data/folds/train_other_500/train/fold_" + str(fold),
-                                 "./data/folds/train_other_500/val/fold_" + str(fold),
+                                 "./data/folds/train_other_500/train/fold_" + str(fold) + ".csv",
+                                 "./data/folds/train_other_500/val/fold_" + str(fold) + ".csv",
                                  train_data, val_data)
 
 f = open('/data/librispeech/train.csv', 'w')

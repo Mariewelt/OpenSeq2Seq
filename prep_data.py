@@ -57,7 +57,7 @@ for line in train_data:
     f.writelines(line + '/n')
 f.close()
 
-f = open('/result/librispeech/val.csv', 'w')
+f = open('/result/val.csv', 'w')
 for line in val_data:
     f.writelines(line + '/n')
 f.close()

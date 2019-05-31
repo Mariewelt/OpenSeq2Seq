@@ -189,7 +189,7 @@ train_params = {
         "dataset_files": [
             "/result/librispeech/train-clean-100/train_clean_100.csv",
             "/result/librispeech/train-clean-360/train_clean_360.csv",
-            "/result/librispeech/train-other_500/train_other_500.csv"
+            "/result/librispeech/train-other-500/train_other_500.csv"
             #"/data/librispeech/librivox-train-clean-360.csv",
             #"/data/librispeech/librivox-train-other-500.csv"
         ],

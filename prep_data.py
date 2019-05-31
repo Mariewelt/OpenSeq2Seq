@@ -86,7 +86,7 @@ for line in train_data_clean_360:
     f.writelines(line + '\n')
 f.close()
 
-f = open('/result/librispeech/train-other-100/train_other_500.csv', 'w')
+f = open('/result/librispeech/train-other-500/train_other_500.csv', 'w')
 for line in train_data_other_500:
     f.writelines(line + '\n')
 f.close()
@@ -105,7 +105,7 @@ for line in train_data_clean_360:
     f.writelines(line + '\n')
 f.close()
 
-f = open('/result/librispeech/val-other-100/val_other_500.csv', 'w')
+f = open('/result/librispeech/val-other-500/val_other_500.csv', 'w')
 for line in train_data_other_500:
     f.writelines(line + '\n')
 f.close()

@@ -54,10 +54,10 @@ train_data, val_data = load_fold("/data/librispeech/librivox-train-other-500.csv
 
 f = open('/result/train.csv', 'w')
 for line in train_data:
-    f.writelines(line + '/n')
+    f.writelines(line + '\n')
 f.close()
 
 f = open('/result/val.csv', 'w')
 for line in val_data:
-    f.writelines(line + '/n')
+    f.writelines(line + '\n')
 f.close()

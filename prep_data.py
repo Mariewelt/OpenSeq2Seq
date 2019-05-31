@@ -70,6 +70,8 @@ train_data_other_500, val_data_other_500 = load_fold(
      train_data_other_500, val_data_other_500
 )
 
+os.mkdir('/result/librispeech')
+
 os.mkdir('/result/librispeech/train-clean-100/')
 os.mkdir('/result/librispeech/train-clean-360/')
 os.mkdir('/result/librispeech/train-other-500/')
